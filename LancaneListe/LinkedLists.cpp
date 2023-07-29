@@ -22,13 +22,14 @@ void Delete1stOccurrence(Node** head, int data);
 bool isPalindrome(Node** head);
 void Merge(Node** head, Node** head2);
 void RemoveDuplicates(Node** head);
-int MiddleNode(Node** head);
+Node* Middle(Node** head);
 void SwapNodes(Node** head);
 
 
 int main(int argc, char* argv[])
 {
 	Node* head = NULL;
+	//Node* head2 = NULL;
 
 	MakeList(&head);
 	cout << "The length of the list is: ";
@@ -44,10 +45,17 @@ int main(int argc, char* argv[])
 	Print(&head);
 	DeleteData(&head, 3);
 	Print(&head);
-	Delete1stOccurrence(&head, 7);*/
+	Delete1stOccurrence(&head, 7);
+	RemoveDuplicates(&head);*/
 	Print(&head);
-	cout << endl;
-	cout << isPalindrome(&head) << endl;
+	/*cout << endl;
+	cout << isPalindrome(&head) << endl;*/
+	Node* mid = Middle(&head);
+	cout << mid->data << " je sredina." << endl;
+
+	//MakeList(&head2);
+	//Merge(&head, &head2); 
+	Print(&head);
 
 	return 0;
 }
@@ -289,7 +297,6 @@ bool isPalindrome(Node** head)
 	{
 		slow = slow->next;
 		fast = fast->next->next;
-
 	}
 	//middle je slow->next, a prev je slow
 	Node* end = slow->next;
@@ -318,9 +325,73 @@ bool isPalindrome(Node** head)
 			cout << "It aint a palindrome" << endl;
 			return 0;
 		}
-		
 	}
 	cout << "It is a palindrome" << endl;
 	return 1;
 	
 }
+
+void RemoveDuplicates(Node** head)
+{
+	Node* curr = *head;
+
+	while (curr != NULL)
+	{
+		Node* prev = curr;
+		Node* next = curr->next;
+		while (next != NULL)
+		{
+			if (curr->data == next->data)
+			{
+				Node* del = next;
+				prev->next = next->next;
+				next = del->next;
+				delete del;
+			}
+			else
+			{
+				prev = prev->next;
+				next = next->next;
+			}
+		}
+		curr = curr->next;
+	}
+}
+
+Node* Middle(Node** head)
+{
+	Node* slow, * fast;
+	slow = *head;
+	fast = *head;
+	if (slow == NULL)
+	{
+		cout << "Lista je prazna" << endl;
+		return 0;
+	}	
+	if (slow->next == NULL)
+		return slow;
+
+	while (fast->next != NULL && fast->next->next != NULL)
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+	}
+	return slow;
+}
+
+void Merge(Node** head, Node** head2)
+{
+	Node* first;
+	first = *head;
+	while (first->next != NULL)
+	{
+		first = first->next;
+	}
+	first->next = *head2;
+}
+
+void SwapNodes(Node** head)
+{
+
+}
+
