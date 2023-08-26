@@ -1,0 +1,1337 @@
+﻿Jun2 2023.
+1. Дата је једноструко спрегнута ланчана листа LL и поље А од N елемената. Листа LL садржи N елемената који нису уређени. Написати псеудокод операције која у листи LL тражи елемент који има максималну вредност, након тога га брише из листе у уписује у поље А. На крају процеса, листа LL је обрисана, а поље А садржи елементе из листе који су сортирани у опадајућем
+редоследу.
+
+FindMax(head)
+A = new array
+i <- 0
+
+while head != NULL do
+    prevNode <- NULL
+    prev <- head
+    max <- head
+
+    while next(prev) != NULL do
+        if info(max) < info(next(prev)) then
+            max <- next(prev)
+            prevNode <- prev
+        endif
+        prev <- next(prev)
+    endwhile
+
+    // pronaso je max
+    if max = head then
+        head <- next(max) // ako je max prvi elemement moglo je if prevNode=NULL
+    else
+        next(prevNode) <- next(max)
+    endif
+    
+    A[i] <- info(max)
+    i <- i + 1
+    freenode(max)
+endwhile
+
+2.
+Задат је текст Т и низови S1, S2. Написати псеудокод операције Brisi(T,S1,S2) којим се у тексту Т врши брисање низа S1 ако је иза њега низ S2 за све појаве низа S1. Подразумевати да постоје основне операције за рад са низовима, а за сваку од њих коју користите у псеудокоду, напишите назив, аргументе и кратак опис шта ради.
+Пример: Umetni(,, Znam da su moj ujak i moj otac generacija",,,moj ",,,otac ") → →,,Znam da su moj moj ujak i otac generacija"
+
+Brisi(T,S1,S2)
+n=Length(T)
+s1=Length(S1)
+s2=Length(S2)
+result=""
+i=0
+
+while i<n do
+	if SUBSTRING(T,i,s1) == S1 then
+		if SUBSTRING(T,i+s1,s2) == S2 then
+			i = i+s1 //preskace se
+		endif
+	endif
+	result = CONCAT(result,SUBSTRING(T,i,1)
+	i=i+1
+endwhile
+
+return result
+
+
+
+3.
+T(k, Ime, Starost)
+h(k) = k mod N
+Ako se racuna da je FP = 0.8 i 9 elemenata
+0.8 = 9/N => N = 11.25 odnosno 12
+Подаци су: (18, Micko, 12), (41, Macko, 10), (20, Bucko, 3), (44, Laki, 2), (29, Ena, 1), (32, Lena, 2), (5, Una, 2), (6, Ana, 2), (33, Ina, 2).
+
+tablica:
+0: (Lena,2)
+1: (Ina,2)
+2: (Ena,1)
+3: (Ana,2)
+4: 
+5: (Macko,10)
+6: (Micko,12)
+7: 
+8: (Bucko,3)
+9: (Laki,2) 
+10: (Ina,2)
+11:  
+
+(5, Una, 2) nmg smestim pa cu da nastavim dalje
+
+
+
+4. A=(20,12,10,15,7,5,6,24,21)
+BST:
+			 20
+		   /   \
+		 12     24
+		/  \    / 
+	   10   15 21
+	  /  
+	 7    
+	/	   
+	5	
+	 \
+	  6
+	  
+MaxHeap:
+	   24
+	  /  \
+	 21   10
+    / \   / \
+   20  7  5  6
+   / \
+  12  15 
+
+Za heap sa n vrednosti koristi se polje veličine n + 1. Za čvor koji se nalazi na poziciji i levi potomak je na 2i, desni potomak je na 2i + 1
+(Ćelija sa indeksom 0 se ne koristi). Operacija insertItem odgovara dodavanju u polje na poziciji n + 1
+
+Dinamicka reprezentacija je samo cvor za tri polja za left, info, right.
+
+Brisanje poslednjeg cvora u statickoj repr:
+Promenljiva END koja pamti lokaciju poslednjeg čvora stabla
+
+	deleteLastNode(treeArray, END):
+		if END = null:
+			return
+		treeArray[END] <- null // -1???
+		END = END - 1
+		exit
+
+
+5.
+
+Random graf ima pet čvorova: A, B, C, D i E, i 4 grane: 
+1: A -> B s težinom 3, 
+2: A -> C s težinom 2
+3: B -> D s težinom 4, 
+4: C -> E s težinom 5
+da ne crtkam
+
+Staticka reprezentacija
+	Matrica susedstva: 
+	 A B C D E
+	A  1 1
+	B      1				prazno su 0
+	C        1
+	D
+	E
+
+	Matrica incidencije:
+	   1  2  3  4 
+	A -1 -1
+	B +1     -1             prazno su 0
+	C    +1     -1
+	D        +1
+	E           +1
+	
+	
+	Matrica težina: 
+	 A B C D E
+	A  3 2
+	B      4				prazno su 0
+	C        5
+	D
+	E
+	
+
+Dinamicka reprezentacija
+head -> A -> 3 (->B) -> 2 (->C)
+		B -> 4 (->D)    
+		C -> 5 (->E)      
+		D
+		E
+
+odredjuje cvor zadat svojom lancanom reprezentacijom, odredjuje cvor s maksimalnim stepenom
+
+MaxDegree(head, maxNode)
+maxDegree <- 0
+maxNode <- NULL
+ptr <- head
+while ptr != NULL do
+	degree <- 0
+	curr<-adj(node)
+	
+	while curr != NULL
+		degree <- degree + 1
+		curr<-next(curr)
+	endwhile
+	
+	if degree > maxDegree then
+		maxDegree <- degree
+		maxNode <- ptr
+	endif
+	ptr<-next(ptr)
+endwhile
+return maxNode
+exit
+
+
+
+
+_____________________________________________________________________________
+
+Kolokvijum I 2023.
+
+﻿
+1. Дато је уређено поље А од 16 елемената: А=(5, 12, 17, 21, 25, 31, 36, 39, 43, 48)
+Приказати поступак тражења у пољу А, корак по корак, елемента чија је вредност 31. У сваком кораку приказати промену индекса и вредности промењивих које се користе у процесу тражења.
+
+Indeksiranje je od nultog elementa, zero-based array
+
+Ako se radi linearno trazenje O(n):
+Find(A, value)
+i <- 0
+while(A[i] != NULL AND A[i] != value) do
+	i <- i + 1
+endwhile
+
+if(A[i] = value) then
+	status <- 1
+else
+	status <- 0
+endif
+exit
+
+i=0, A[i]=5, 5 != 31 => A[i]!=31  -- prva iteracija petlje
+i=1, A[i]=12, 12 != 31 => A[i]!=31 -- druga iteracija petlje
+i=2, A[i]=17, 17 != 31 => A[i]!=31 -- treca iteracija petlje 
+i=3, A[i]=21, 21 != 31 => A[i]!=31 -- cetvrta iteracija petlje
+i=4, A[i]=25, 25 != 31 => A[i]!=31 -- peta iteracija petlje
+i=5, A[i]=31, 31 = 31 => A[i]=31 -- ne ulazi u petlju, uspesno pronadjeno, status = 1 (ako je return tip bool onda bi vratio true)
+-----
+Ako se radi binarno trazenje, posto je uredjeni niz, O(log(n)):
+ 
+FindBinary(A, value) // isto je zero-based array
+l <- 0
+r <- n-1
+s <- (l + r) / 2
+
+while l <= r AND value != A[s] do
+    if value < A[s] then
+        r <- s - 1
+    else
+        l <- s + 1
+    endif
+    s <- (l + r) / 2
+endwhile
+
+if value = A[s] then  
+    status <- 1
+else
+    status <- 0
+endif
+exit
+
+
+Postupak:
+niz gde se trazi: 5, 12, 17, 21, 25, 31, 36, 39, 43, 48
+l = 0
+r = 9 
+s <- 4
+l<r to je tacno, a A[s] sto je 25 je manje od 31 (value), sto znaci da se trazi u desnoj polovini niza
+l <- 5
+
+31, 36, 39, 43, 48 
+l<r je tacno (5<9), a s je 7
+A[s] sto je 39 je vece od 31 (value), sto znaci da se trazi u levoj polovini tog podniza
+r <- 6
+
+31, 36
+l=5, r=6, l<r sto je tacno, a s je 5
+A[s] sto je A[5] je 31, izlazi iz petlje, pronasao je
+
+----------
+
+2. 
+brise poslednji element lancane liste
+
+DeleteLast(head)
+if head = NULL then // prazna je lista
+	exit 
+endif
+
+ptr <- head
+
+if next(ptr) = NULL then // samo 1 el ima
+	head <- NULL
+	freenode(ptr)
+	exit 
+endif
+
+prev <- NULL
+
+while next(ptr) != NULL do
+	prev <- ptr
+	ptr <- next(ptr)
+endwhile
+
+next(prev) <- NULL
+freenode(ptr)
+
+exit 
+----------
+
+3. sta je neophodno za implementaciju reda Q ako se za memorijsku reprezentaciju koristi polje
+
+Prvo, treba definisati polje (cirkularno polje) odredjene velicine koje će se koristiti za čuvanje elemenata reda i njihovih prioriteta. 
+Drugo, potrebne su osnovne operacije za rad sa tim poljem kao redom
+Nzm?
+
+Pseudokod za dodavanje:
+
+Enqueue(Q,el,N,f,r)
+if (r+1) mod N = f then
+exit //red je pun
+else
+Q[r] <- el
+r <- (r+1) mod N
+endif
+exit
+
+
+Pseudokod za brisanje elemenata iz reda:
+Dequeue(Q,el,N,f,r)
+if r = f then
+exit // red je prazan
+else
+el <- Q[f]
+f <- (f+1) mod N
+endif
+exit
+
+4.
+Задат је текст Т и низови S1, S2 і S3. Написати псеудокод операције Umetni(T,S1,S2,S3) којим се врши уметање у текст Т низа S2 испред низа S1, али само ако се иза S1 налази низ S3. Подразумевати да постоје основне операције за рад са низовима, а за сваку од њих коју користите у псеудокоду напишите назив, аргументе и кратак опис шта ради.
+Пример:
+Umetni (,, Znam da su moj ujak i moj otac generacija", „moj ",,, dragi ", "otac") →
+→,,Znam da su moj ujak i dragi moj otac genеracija"
+
+Umetni(T,S1,S2,S3)
+
+i=0
+n=Length(T)
+s1=Length(S1)
+s2=Length(S2)
+s3=Length(S3)
+while(i<n) do
+	if SUBSTRING(T,i,s1) == S1
+		if SUBSTRING(T,i+s1,s3) == S3 then
+			result = CONCAT(result,S2)
+			result = CONCAT(result,SUBSTRING(T,i,s1))
+			result = CONCAT(result,S3)
+			// result = CONCAT(CONCAT(CONCAT(result,S2),SUBSTRING(T,i,s1)),S3)
+			i=i+s1+s3
+		endif
+	endif
+	i=i+1
+endwhile
+return result
+
+
+
+5.
+﻿
+
+Залата је Хеш таблица величине 11 елемената која чува податке о љубимцима (ID, Ime). За примарну транформацију се користи хеш функција h(ID) = ID mod 11 а за смештање синонима квадратно тражење.
+Приказати празну хеш таблицу, а након тога поступак, корак по корак:
+(1) додавања података о љубимцима у хеш таблицу:
+(81, Micko), (63, Macko), (38, Bucko), (48, Laki), (26, Ena).
+(2) након тога поступак брисања из Хеш таблице љубимца чији је ID=38, и
+(3) поступак тражења у Хеш таблици љубимца чији је ID=48.
+
+(1) tablica
+0:
+1:
+2: Laki
+3:
+4: Micko 
+5: (Bucko) DELETED
+6:
+7:
+8: Macko
+9: Ena
+10:
+
+81 mod 11 = 4
+63 mod 11 = 8
+38 mod 11  = 5
+48 mod 11 = 4 // 5 zauzeto, 8 zauzeto, 2 slobodno
+26 mod 11 = 4 // 5 zauzeto, 8 zauzeto, 2 zauzeto, 9 slobodno
+
+(2)
+Brisanje: 
+Izracuna hash za ID 38, ode na poziciju gde mu kaze hash, vidi da li se poklapa key sa ID-em, ako se poklapa onda stavlja posebnu vrednost DELETED
+
+(3)
+Trazenje: 
+Izracuna se hash za ID 48, ode se na poziciju gde mu kaze hash, vidi se da li se key poklapa sa ID-em, ne poklapa se, ide kako mu sekundarna transormacija kaze (na poziciju 5) i gleda da li se tu poklapa, ne poklapa se, ide dalje po sekundarnoj transformaciji (na poziciju 8) i gleda da li se tu poklapa, ne poklapa se, ide dalje po sekundarnoj transformaciji (na poziciju 2) i gleda da li se tu poklapa, poklapa se, element je nadjen.
+
+_____________________________________________________________________________
+
+Kolokvijum II 2023.
+
+1. 
+BST i MaxHeap
+A=(10,15,60,12,7,5,6,14)
+
+BST:		 10
+		   /   \
+		  7     15
+		/       / \
+	   5       12  60
+	    \       \
+	     6       14
+	
+Brisanje cvora 15: posto ima oba potomka, gleda se desno podstablo i najmanja vrednost tu, inorder successor, sto je 60, on "prelazi" na to mesto
+
+MaxHeap:	 60
+		   /   \
+		  14    15
+		 / \    / \
+	    12 7    5  6
+	    /       
+	    10      
+		
+Brisanje cvora 15: uzimanje poslednjeg elementa u podstablu gde je 15 koren, znaci 6 ce da dodje na to mesto i posto je veci od 5, zadrzava se, nema downheap		
+
+
+Dinamicka reprezentacija je isto ovo samo s 3 polja.
+Staticka je 0 polje prazno, i koren podstabla, levi 2i, desni 2i+1 polje mrzi me
+
+
+2.
+
+Random graf ima pet čvorova: A, B, C, D i E, i 4 grane: 
+1: A - B 
+2: A - C 
+3: B - D 
+4: C - E 
+da ne crtkam
+
+Staticka reprezentacija
+	Matrica susedstva: 
+	  A B C D E
+	A   1 1
+	B 1     1				prazno su 0
+	C 1       1
+	D   1
+	E     1
+
+	Matrica incidencije:
+	   1  2  3  4 
+	A  1  1
+	B  1     1            prazno su 0
+	C     1     1    
+	D        1  
+	E           1
+	
+	
+	
+
+Dinamicka reprezentacija
+head -> A -> e1 (->B) -> e2 (->C)
+		B -> e3 (->D)    
+		C -> e4 (->E)      
+		D
+		E
+
+Za neorijentisan brise cvor ciji je info deo u, znaci da treba da obrise sve grane u tom cvoru, treba da obrise sve grane gde je on izlazni cvor, pa i sam taj cvor
+
+deleteNode(head, u)
+node <- head
+prevNode <- NULL
+
+while node != NULL AND data(node) != u do
+	prevNode <- node
+	node <- next(node)						//nalazi cvor
+endwhile
+if node = NULL then return
+
+while adj(node) != NULL do
+	del <- adj(node)
+	adj(node) <- next(adj(node))				//brise grane mu
+	freenode(del)
+endwhile
+
+ptr <- head
+
+while ptr != NULL
+	prevEdge <- NULL
+	curr <- adj(ptr)
+	
+	while curr != NULL do
+		if dst(curr) = node then
+			dell <- curr
+			if prevNode = NULL  then	//ako je prva grana odma
+				adj(ptr) <- next(curr)
+			else 
+				next(prevEdge) <- next(curr)
+			endif
+			curr<-next(curr)
+			freenode(dell)
+		else 
+			prevEdge <- curr
+			curr <- next(curr)
+		endif
+	endwhile
+	ptr <- next(ptr)
+endwhile
+
+if prevNode = NULL then
+	head <- next(node)
+else 
+	next(prevNode) <- next(node)
+endif
+freenode(node)							//brise cvor
+exit
+
+
+
+_____________________________________________________________________________
+
+Oktobar II 2022.
+1.
+FindMax(A, n, max)
+i <- 0
+iMax <- 0
+while (i < n) do
+	if A[i] > max then
+		max <- A[i]
+		iMax <- i
+	endif
+	i <- i + 1
+endwhile
+A[iMax] <- -1 //stavlja se -1 ili da se premesta sve  na tu poziciju u jednu while petlju nzm
+return max
+
+ CreateSLL(A, N)
+if N = 0 then
+	exit
+endif
+
+head <- NULL
+i <- 0
+while (i < N) do
+	newNode <- getNode()
+	info(newNode) <- FindMax(A, N, A[i]) 
+	next(newNode) <- head
+	head <- newNode
+	i <- i + 1
+endwhile
+exit
+
+
+2. sta je neophodno za implementaciju reda Q ako se za memorijsku reprezentaciju koristi lancana lista
+
+Enqueue(Q,N,el,f,r)
+newNode <- getNode()
+info(newNode) <- el
+if f = NULL AND r = NULL then //prazna lista ili samo f=NULL
+	next(newNode) <- f 	// nullptr
+	f <- newNode
+else 
+	next(newNode) <- next(r) //sto je nullptr
+	next(r) <- newNode
+endif
+r <- newNode
+exit
+
+Dequeue(Q,N,el,f,r)
+if f = NULL AND r = NULL then // prazna lista ili samo f=NULL
+exit
+
+el <- info(f)
+del <- f
+f <- next(f)
+freeNode(del)
+exit
+
+
+Hash tablica za h(k) funkciju i sekundarno kvadratno trazenje mesta za sinonime. Навести све могуће случајеве и приказати како се тражи елемент у таблици.
+
+Izracuna se h(k) za zadato k i pogleda se na h(k) adresi da li je taj podatak onaj koji se trazi (ako se k poklapa s njegovim kljucem)
+Ako ne, onda se ide dalje po sekundarnom kvadratnom trazenju jer je verovatno sinonim u pitanju. Ide se za h(k) + 1, h(k) + 4, h(k) + 9 ... po formuli novaPozicija = (pocetnaPozicija + korak*korak) mod velicinaTablice. Ponavlja se postupak sve dok se ne nadje
+Ako se trazeni kljuc nalazi u hash tablici primenom sek.transf. onda se potupak zavrsava.
+
+Ako dodje do praznog mesta ili se vrti u krug ispitujuci sve pozicije (losa fja) ili je prosao sve pozicije, onda se postupak zavrsava neuspesno
+
+
+3.
+A=(13,2,18,1,25,7,6,4)
+BST:		 13
+		   /   \
+		  2     18
+		/  \      \
+	   1    7     25
+	       /   
+	      6      
+		 /
+		4
+Ako je cvor eksterni, samo se obrise i ukine veza s pretkom.
+Ako cvor ima jednog potomka, onda taj potomak dolazi na njegovo mesto (deleteByCopying) i brise se taj preostali
+Ako cvor ima dva potomka, gleda se inorder successor (cvor s najmanjom vrednoscu u desnom podstablu) i on se postavlja na mesto cvora koji treba da se brise (overrideuje se) a ostatak se brise
+
+Brise se cvor 2: prvo se nadje gde je i ustanovi se koliko potomaka ima, posto ima 2 potomka, gleda se inorder successor sto je 4, pa se on stavlja na to mesto, a 2 nestaje. 
+
+
+4.
+Za orijentisani graf G brise poteg izmedju cvorova ciji su info delovi u i v
+Posto ne znam da l je u deo prvog cvora, a v deo drugog cvora i obrnuto, oba ce da se provere
+
+deleteEdgy(head, u, v)
+
+node1 <- head
+
+while node1 != NULL AND data(node1) != u do
+	node1 <- next(node1)										//pronalazi prvi cvor
+endwhile
+if node1 = NULL then 
+	return
+endif // nema prvog cvora
+
+node2 <- head 
+while node2 != NULL AND data(node2) != v do
+	node2 <- next(node2)										//pronalazi drugi cvor
+endwhile
+if node2 = NULL then return // nema drugog cvora
+
+edg <- adj(node1)
+prevEdg <- NULL
+
+while edg != NULL AND dst(edg) != node2 do					//gleda da l je prvi pocetak potega
+	prevEdg <- edg
+	edg <- next(edg)
+endwhile
+
+if edg = NULL then // nije izlazni cvor sa u, nego je sa v		// ako nije
+
+	edg <- adj(node2)
+	prevEdg <- NULL
+	while edg != NULL AND dst(edg) != node1 do					//gleda da l je drugi pocetak potega
+		prevEdg <- edg
+		edg <- next(edg)
+	endwhile
+if edg = NULL then return
+	
+if prevEdg = NULL then											//ovde brise
+	adj(node) <- next(edg)
+else 
+	next(prevEdg) <- next(edg)
+endif
+freenode(edg)
+
+exit
+
+* Napomena:::::: ovo mozda nije najidealnije resenje, pa je mozda bolje da se trazi prvo grana ciji dst ima u ILI v, a onda da se poklopi za je to grana u cvoru koji ima v ILI u za data deo, pa da se obrise.................................dobro evo:
+
+deleteEdge(head, v, u)
+
+node <- head
+
+while node != NULL do
+    edg <- adj(node)
+    prevEdg <- NULL
+
+    while edg != NULL do
+        if (data(dst(edg)) = v && data(node) = u) OR (data(dst(edg)) = u && data(node) = v) then
+            if prevEdg = NULL then
+                adj(node) <- next(edg)
+            else
+                next(prevEdg) <- next(edg)
+            endif
+            freenode(edg)
+            return
+        endif
+
+        prevEdg <- edg
+        edg <- next(edg)
+    endwhile
+
+    node <- next(node)
+endwhile
+
+if node = NULL then
+return exit greska baci pet
+
+
+
+_____________________________________________________________________________
+
+Oktobarski 2022.
+
+Задат је текст Т и низови S1, S2 і S3. Написати псеудокод операције Umetni(T,S1,S2,S3) којим се врши уметање у текст Т низа S2 испред низа S1, али само ако се иза S1 налази низ S3. Подразумевати да постоје основне операције за рад са низовима, а за сваку од њих коју користите у псеудокоду напишите назив, аргументе и кратак опис шта ради.
+Пример:
+Umetni (,, Znam da su moj ujak i moj otac generacija", „moj ",,, dragi ", "otac") →
+→,,Znam da su moj ujak i dragi moj otac genеracija"
+
+Umetni(T,S1,S2,S3)
+
+i=0
+n=Length(T)
+s1=Length(S1)
+s2=Length(S2)
+s3=Length(S3)
+while(i<n) do
+	if SUBSTRING(T,i,s1) == S1
+		if SUBSTRING(T,i+s1,s3) == S3 then
+			result = CONCAT(result,S2)
+			result = CONCAT(result,SUBSTRING(T,i,s1))	// ovo ostavljam ovde ovako jer sam retardirana, treba result = CONCAT(result,S1)
+			result = CONCAT(result,S3)
+			// result = CONCAT(CONCAT(CONCAT(result,S2),SUBSTRING(T,i,s1)),S3)
+			i=i+s1+s3
+		endif
+	endif
+	i=i+1
+endwhile
+return result
+
+
+2.
+Дата је Хеш таблица T(k, Name), где је k кључ а Name инфо део података који се чувају. Хеш таблица користи хеш функцију h(k)=k mod 11 и квадратно тражење места за синониме.
+Прикажите најпре празну Хеш таблицу, а након тога, корак по корак, процедуру додавања следећих података у Хеш таблицу: (81, Micko), (63, Macko), (38, Bucko), (48, Laki), (70, Ena). Након додавања, приказати процес брисања податка чији је кључ k = 70.
+
+tablica:
+0:
+1:
+2: Laki
+3:
+4: Micko 
+5: (Bucko) DELETED
+6:
+7:
+8: Macko
+9: Ena
+10:
+
+81 mod 11 = 4
+63 mod 11 = 8
+38 mod 11  = 5
+48 mod 11 = 4 // 5 zauzeto, 8 zauzeto, 2 slobodno
+70 mod 11 = 4 // 5 zauzeto, 8 zauzeto, 2 zauzeto, 9 slobodno
+
+
+Brisanje: 
+Izracuna hash za ID 70, ode na poziciju gde mu kaze hash, vidi da li se poklapa key sa ID-em, ako se poklapa onda brise. A posto se ne poklapa, ide po sekundarnoj kvadratnoj transformaciji i gleda tu, ponavlja postupak dok ne nadje, prvo ide na poziciju 5 (ne poklapa se), onda na poziciju 8 (ne poklapa se), zatim na poziciju 2 (ne poklapa se) i konacno na poziciji 9 se poklapa, stavlja posebnu vrednost DELETED.
+
+
+
+3. 
+A=(15,10,12,60,8,7,5)
+
+BST:
+			 15
+		   /   \
+		  10    60 
+		/  \     
+	   8    12   
+	  /  
+	 7   
+	/	   
+	5	 
+Preorder: 15,10,8,7,5,12,60
+Inorder: 5,7,8,10,12,15,60
+Postorder: 5 7 8 12 10 60 15
+
+	  
+MaxHeap:
+	   60
+	  /  \
+	 15   12  
+    / \   / \
+   10  8  7  5     
+
+Preorder: 60,15,10,8,12,7,5
+Inorder: 10,15,8,60,7,12,15
+PostOrder:10,8,15,7,5,12,60
+
+4. 
+prikazivanje grafa, ima gore uradjeno
+nalazi poteg s najvecom tezinom i brise ga
+
+deleteFattestEdge(head)
+
+node <- head
+maxW <- 0
+maxWNode <- NULL
+prevMaxW <- NULL
+del <- NULL
+
+while node != NULL
+	edg <- adj(node)
+	prevEdg <- NULL
+	
+	while edg != NULL
+		if w(edg) > maxW then
+			maxW <- w(edg)
+			maxWNode <- node
+			prevMaxW <- prevEdg
+			del <- edg
+		endif	
+		
+		prevEdg <- edg
+		edg <- next(edg)
+	endwhile
+
+	node <- next(node)
+endwhile
+
+if node = NULL 	//	ili maxWNode
+	return NULL
+else
+	if prevMaxW = NULL then
+		adj(maxWNode) <- adj(next(maxWNode))
+	else 
+		next(prevMaxW) <- next(del)
+	endif
+	freenode(del)
+endif
+exit
+
+
+
+_____________________________________________________________________________
+	
+	
+Septembarski 2022.
+1.a.
+
+UbicuSe(A, n, lesser, greater)
+lesser <- 0
+greater <- 0
+sum <- 0
+for i <- 0, n-1
+	sum <- sum + A[i]
+endfor
+sum <- sum / n //ovde je aritmeticka suma
+
+for i <- 0, n-1
+	if A[i] < sum
+	lesser <- lesser + 1
+	else
+	greater <- greater + 1
+	endif
+endfor
+exit
+
+tekst T i uzorak P, UMETNI(T,P,Q)  umece se Q u tekst iza svih pojava uzorka P
+
+UMETNI(T,P,Q)
+result <- ""
+i<-0
+while i<LENGTH(T) do
+	if SUBSTR(T,i,LENGTH(P) = P then
+		result <- CONCAT(result, P)
+		result <- CONCAT(result, Q)
+		i <- i + LENGTH(P)
+	else
+		result <- CONCAT(result, SUBSTR(T,i,1)
+		i <- i+1
+	endif
+endwhile
+exit
+
+
+
+2.a. Дата је Хеш таблица величине 11 елемената која чува податке о студентима T(IND, Name), где је IND кључ а Name инфо део података који се чувају. Хеш таблица користи хеш функцију h(k)=k mod 11 и квадратно тражење за решавање колизије. Прикажите најпре празну Хеш таблицу, а након тога, корак по корак, процедуру додавања следећих података у Хеш таблицу: (81, Micko), (63, Macko), (38, Bucko), (48, Laki), (70, Ena). Одредити фактор попуњености ове Хеш таблице након уписа свих датих података. Након додавања, приказати процес тражења податка, корак по корак, чији је кључ k = 70.
+
+Isto kao oktobarski 2022. 
+FP = 5/11 = 0.45
+
+A trazenje isto kao za oktobar 2022. samo ne stavlja deleted (ne brise, log)
+
+
+3.
+	    1
+	  /   \
+	 2     3 
+    / \   / \
+   4   5  6  7
+  / 
+ 8
+ 
+ "Popunjava se redom" - > almost complete binary tree is a complete binary tree till n-1 level, bolja reprezentacija bi trebalo da je staticka: gotovo potpuno binarna stabla obično se reprezentuje pomoću polja. Ta reprezentacija je bolja jer ne sadrži prazne slotove sem onih cvorova koji su na poslednjem nivou, a ako se zna koliko cvorova imamo onda moze da se zakljuci koji su prazni slotovi. Ako imamo indeks roditelja i, njegovo levo dete se nalazi na poziciji 2 * i, a njegovo desno dete na poziciji 2 * i + 1. Ova reprezentacija omogućava O(n) pristup čvorovima u stablu
+ 
+ h=log2(n+1)-1 = log2(9)-1 = 3 => visina je 3
+ (Ako cvor na nivou h ima desno dete, onda ima sigurno levo dete)
+ 
+ Postorder:
+ 8,4,5,2,6,7,3,1
+ Pseudokod:
+ 
+ 
+ 
+ 4.
+ Za orijentisani graf G brise sve potege koji polaze iz u i zavrsavaju se u v
+
+deleteEdges(head, v, u)
+
+node <- head
+
+while node != NULL AND node != u
+	node <- next(node)
+endwhile
+
+if node = NULL then // nema prvog cvora
+	return
+endif
+
+edg <- adj(u)
+prevEdg <- NULL
+
+while edg != NULL
+	if dst(edg) = v then
+		if prevEdg = NULL then
+			adj(edg) <- next(edg)
+		else
+			next(prevEdg) <- next(edg)
+		endif
+		freenode(edg)
+	else
+		prevEdge <- edg
+	endif
+	edg <- next(edg)
+endwhile
+exit
+
+ 
+_____________________________________________________________________________
+
+Junski 2022.
+
+1.
+A=(12,7,5,8,10,15,60)
+
+BST:	12
+	  /  \
+	 7    15 
+    / \    \
+   5   8    60
+		\
+		10
+Brisanje cvora 60: posto nema potomaka, samo se ukida veza njegovog pretka (15->next=nullptr) i delete ptr; toliko
+
+MaxHeap:60
+	   /  \
+	 10    15 
+    / \   / \
+   7   8  5  12
+Ovo se svodi na brisanje korena stabla, uzima se poslednji element u celom stablu i stavlja na njegovo mesto, a onda se radi downheap (jer je maxheap gleda se da li ima ispod njega u desnom podstablu nesto sto je vece i tako se menja, dok ne dodje do odgovarajuce pozicije)
+
+
+2.
+Skoro isto kao Oktobar II 2022, samo sto je ovde neorijentisani graf. Ali ista fora, jer nzm koji je prvi cvor 
+
+
+
+
+_____________________________________________________________________________
+
+Jun II 2021.
+1. Dato je polje A od N elemenata cije su vrednosti brojevi u rastucem poretku, napisati pseudokod operacije koja za polje A trazi element u polju cija je vrednost E zadata
+
+Find(A, N, E)
+left <- 0 //zero based je 
+right <- N-1
+mid <- (left + right) / 2 
+
+while left < right AND A[mid] != E do
+	if E < A[mid] then
+		right <- mid - 1
+	else
+		left <- mid + 1
+	endif
+	mid <- (left + right) / 2 
+endwhile
+
+if A[mid] = E then
+return mid //nadjen
+else
+//nije nadjen
+return NULL
+exit
+
+2.
+kako se menjaju ukazatelji
+Posto front pokazuje na prvi element u redu, a rear pokazuje na prezno mesto nakon poslednjeg elementa.
+
+
+3. A=(3,2,1,12,1,17,10)
+
+BST:	3
+	  /  \
+	 2    12 
+    /    / \
+   1    10  17
+	\	
+	 1	
+	 
+Postorder:  1,1,2,10,17,12,3
+
+
+4. 
+dodaje poteg izmedju u i v, to su infodelovicvora
+
+addEdge(head,u,v)
+
+node1 <- findNode(head,u)
+node2 <- findNode(head,v)
+
+if node1 = NULL OR node2 = NULL
+	return
+endif
+
+edg <- getnode()
+dst(edg) <- node2
+
+next(edg) <- adj(node1)
+adj(node1) <- edg
+
+exit
+
+_____________________________________________________________________________
+
+Kolokvijum I 2021. 
+
+
+1.a. Kolokvijum I 2021. slicno kao Kolokvijum I 2023. binarno trazenje
+
+1.b. Nije lepo napisan zadatak, je l samo prvo pojavljivanje?? 
+
+
+BRISI_UZORAK(T,P)
+result <- ""
+i <- 0
+
+while i < LENGTH(T) AND SUBSTR(T,i,LENGTH(P)) != P do
+	result <- CONCAT(result, SUBSTR(T,i,1)
+	i <- i+1
+endwhile
+
+if SUBSTR(T,i,LENGTH(P)) = P then
+	result <- CONCAT(result, SUBSTR(T,i + LENGTH(P), LENGTH(T) - LENGTH(P) - i)) //nadovezi ostatak
+endif
+
+return result
+
+
+2. dodavanje novog elementa E u jednostruko spregnutu lancanu listu L nakon elementa cija je lokacija LOC zadata
+
+InsertAfterLoc(head, loc, E)
+if head = NULL then exit 
+
+newNode <- getNode()
+info(newNode) <- E
+next(newNode) <- next(loc)
+next(loc) <- newNode
+
+
+3. Osnovne operacije s magacinom
+
+push(S, N, top, el)
+	if top = N-1 then //stack overflow
+	exit
+	endif
+top <- top + 1
+S[top] <-el
+exit
+
+pop(S, N, top, el)
+	if top = -1 //stack underflow
+	exit
+	endif
+el <- S[top]
+S[top] = null
+top<- top - 1
+exit
+
+
+isFull(S,N,top)
+	if top = N-1 then
+		return true
+	else
+		return false
+exit
+
+
+isEmpty(S,top)
+	if top = -1 then
+		return true
+	else
+		return false
+exit
+
+topOfStack(S,top,e)
+	e<-S[top]
+exit
+
+
+
+4. Zadata je Heš tablica koja čuva podatke o radnicima (ID, Ime). Za primarnu tranformaciju se koristi heš funkcija h=(ID) mod 13 a za rešavanje kolizije linearno traženje mesta za sinonime. Prikazati postupak, korak po korak, dodavanja redom sledećih podataka u heš tablicu: (18, Pera), (41, Maka), (22, Joca), (44, Laza), (59, Ana), (32, Mila), (31, Jana), (73, Moca).
+
+Al koliko ima mesta tablica? Da li se gleda po FP ili se gleda po ovome mod 13??? vrv je tablica 13
+ako je po FP onda ima 10 mesta, a ovako ima 13
+
+Cu uradim oba
+
+(1) po FP, 10 mesta, h(k) = k mod 13 mod 10
+
+0:	Jana // sinonim za 4
+1:	Moca // sinonim za 3
+2:	Maka
+3:	
+4:  
+5:  Pera
+6:	Laza // sinonim za 1
+7:	Ana
+8: 	Mila // sinonim za 2
+9:	Joca
+
+    h(18) = 18 mod 13 = 5
+    h(41) = 41 mod 13 = 2
+    h(22) = 22 mod 13 = 9
+    h(44) = 44 mod 13 = 5
+    h(59) = 59 mod 13 = 7
+    h(32) = 32 mod 13 = 6
+    h(31) = 31 mod 13 = 5
+    h(73) = 73 mod 13 = 8
+	
+(2) ima 13 mesta, most likely
+0:	
+1:	
+2:	Maka
+3:	
+4:  
+5:  Pera
+6:	Laza // sinonim za 1
+7:	Ana
+8: 	Mila // sinonim za 2
+9:	Joca
+10: Jana // sinonim za 4
+11: Moca // sinonim za 2
+12: 
+
+_____________________________________________________________________________
+
+Kolokvijum II 2021.
+
+1.a.i. Visina cvora je duzina najduzeg puta (broj grana) od tog cvora  do  lista.
+1.a.ii. Potomak je čvor koji se nalazi na nižem nivou od određenog čvora i može se doći do njega putem jednog ili više grana od tog čvora. Potomci cvora G su H,J,M,I,K,L
+
+
+_____________________________________________________________________________
+
+septembar 2021. ??????
+
+1. data je SLL i polje A od N elemenata, napisati pseudokod operacije koja iz lancane liste L cita element koji ima najvecu vrednost. Primenom ove procedure napisati pseudokod operacije koja elemente liste L upisuje u polje A tako da polje bude sortirano.
+	
+
+FindMax(head, max) //vraca max
+i <- 0
+while head != NULL do
+    prevNode <- NULL
+	maxNode <- head
+	prev <- NULL
+    curr <- head
+
+    while next(curr) != NULL do
+        if info(max) < info(curr) then
+            maxNode <- curr
+            prevNode <- prev
+        endif
+		prev <- curr
+        curr <- next(curr)
+    endwhile
+	
+	max <- info(maxNode)
+	del <- maxNode
+	if prevNode = NULL then
+		head <- next(maxNode)
+	else
+		next(prevNode) <- next(maxNode)
+	endif
+		freenode(del)
+	return max //vraca info
+exit
+
+
+insertToArray(A, N, head)
+i <- 0
+while i<N do
+	A[i] <- FindMax(head, max)
+	i <- i + 1
+endwhile
+
+2. sve je isto
+
+3.
+
+A=(6,9,4,1,8,2)
+
+BST:	6
+	  /  \
+	 4    9 
+    /    /
+   1    8      Postorder: 2,1,4,8,9,6
+	\
+	2
+
+MaxHeap:
+	    9
+	  /  \
+	 8    4 
+    / \   / 
+   1   6  2		Postorder: 1,6,8,2,4,9
+
+MinHeap:
+	    1
+	  /  \
+	 4    2 
+    / \   / 	Postorder: 9,8,4,6,2,1
+   9   8  6  
+
+
+4. isti kod Oktobar II 2022.
+
+_____________________________________________________________________________
+
+Oktobarski 2021.
+
+U sustini svi zadaci su slicni
+
+4. 
+trazi sve potege koji imaju tezinu E
+
+findEdges(head,E)
+
+node <- head
+edges <- new array
+i <- 0
+
+while node != NULL do
+	edg <- adj(node)
+	
+	while edg != NULL do
+		if w(edg) = E then
+			edges[i] <- edg
+			i <- i+1
+		endif
+		
+		edg <- next(edg)
+	endwhile
+	
+	node <- next(node)
+endwhile
+
+return edges
+exit
+
+
+_____________________________________________________________________________
+
+Decembarski 2021
+
+2. 
+Hash tablica je organizovana kao vektor (ili niz) lančanih listi. Svaki element u ovom vektoru predstavlja početak jedne lančane liste. 
+
+Traženje podatka: Kada želimo da pronađemo određeni podatak, koristimo istu heš funkciju da bismo odredili kojoj lančanoj listi treba da pristupimo. Zatim, prolazimo kroz tu listu praćenjem linkova (standardna metoda za lančane liste) kako bismo pronašli traženi podatak.
+
+Broj elemenata liste - broj sinonima.
+
+Brisanje se svodi na brisanje elementa iz lančane liste. Ne treba specijalna vrednost DELETED.
+
+
+3.
+
+A=(13,22,1,10,18,7)
+
+BST:   13
+	  /  \
+	 1    22 
+      \   /
+      10 18  
+	  /
+	 7
+
+
+4.
+
+outDeg(head,value) //value=3
+
+node <- head
+nodes <- new array
+i <- 0
+
+while node != NULL do
+	edg <- adj(node)
+	outDeg <- 0
+	
+	while edg != NULL do
+		outDeg = outDeg + 1
+		edg <- next(edg)
+	endwhile
+	
+	if outDeg = value then
+		nodes[i] <- node
+		i <- i + 1
+	endif
+
+	node <- next(node)
+endwhile
+
+return nodes
+exit
+_____________________________________________________________________________
+
+Oktobar II 2021.
+
+3.
+A=(13,2,18,1,25,7,6,4)
+
+BST:   13
+	  /  \
+	 2    18 
+    / \    \
+   1   7    25
+	  /
+	 6
+	/
+   4
+   
+  Nadje se cvor koji ima vrednost 2, gledaju se potomci, ima oba potomka, gleda se inorder successor (4), njegova vrednost se kopira u 2, originalno 4 se unlinkuje i brise.
+  
+  
+4. Oktobar II 2022.
+  
+  
+  
+  
+  pitalja::::
+Staticko predstavljanje stabla
+
+Dodavanje cvora u BST ako je memorisano staticki
+(okt 2022)
+
+Trazenje vrednosti u BST ako je memorisano staticki (sept 2022)
+
+Da li je kod neorijentisanih grafova grana u oba cvora u adj listi ili moze samo u jednom okt2 2022 i jun 2022
